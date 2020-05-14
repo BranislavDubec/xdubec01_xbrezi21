@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
    <children>
-      <SplitPane dividerPositions="0.9" layoutX="190.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.5" layoutX="190.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <ScrollPane pannable="true" prefHeight="800.0" prefWidth="598.0">
                <content>
-                  <AnchorPane fx:id="content" prefHeight="10000.0" prefWidth="10000.0">
-                     <children>
-                        <Line endX="56.79998779296875" endY="145.0" layoutX="612.0" layoutY="306.0" startX="-100.0" />
-                        <Line endX="100.0" layoutX="659.0" layoutY="275.0" startX="-21.492919921875" startY="146.7071533203125" />
-                        <Circle fill="DODGERBLUE" layoutX="685.0" layoutY="379.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                     </children>
-                  </AnchorPane>
+                  <AnchorPane fx:id="content" depthTest="DISABLE" prefHeight="10000.0" prefWidth="10000.0" />
                </content>
             </ScrollPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="50.0" prefWidth="1000.0" style="-fx-background-color: grey;" SplitPane.resizableWithParent="false">
+          <AnchorPane maxHeight="40.0" minHeight="0.0" minWidth="0.0" prefHeight="26.0" prefWidth="598.0" style="-fx-background-color: grey;" SplitPane.resizableWithParent="false">
                <children>
-                  <DatePicker layoutX="-7.0" layoutY="6.0" />
-               </children></AnchorPane>
+                  <Label fx:id="showTime" layoutX="14.0" layoutY="10.0" text="Label" />
+                  <ChoiceBox fx:id="timeChoice" layoutX="83.0" layoutY="6.0" maxHeight="60.0" maxWidth="150.0" prefHeight="26.0" prefWidth="126.0" AnchorPane.leftAnchor="83.0" />
+                  <Button fx:id="setValue" layoutX="427.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#setValues" prefHeight="26.0" prefWidth="41.0" text="OK" />
+                  <ChoiceBox fx:id="speedChoice" layoutX="259.0" layoutY="5.0" prefHeight="26.0" prefWidth="92.0" />
+                  <Label fx:id="showSpeed" layoutX="376.0" layoutY="12.0" text="skap" />
+               </children>
+            </AnchorPane>
          </items>
       </SplitPane>
       <AnchorPane fx:id="plusButton" onMouseEntered="#buttonHoverPlus" onMouseExited="#buttonUnHoverPlus" onMousePressed="#buttonPressedPlus" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: gray;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
