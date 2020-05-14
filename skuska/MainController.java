@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -44,7 +45,7 @@ public class MainController {
 		private ChoiceBox<String> speedChoice = new ChoiceBox<>();
 		@FXML
 		private Button setValue = new Button();
-		
+		private List<Print> toPrint;
 		private long period = (long) Math.pow(10, 9);
 		private Timer timer = new Timer(false);
 		private LocalTime time	 = LocalTime.now();
@@ -166,4 +167,11 @@ public class MainController {
 			
 		}
 		
+		public void printAll(List<Print> toPrint) {
+			this.toPrint = toPrint;
+			
+			for(Print print:toPrint) {
+				content.getChildren().addAll(print.printShapes());
+			}
+		}
 }	

@@ -1,0 +1,8 @@
+{
+  "links" : [
+    {"name" : "1", "startStop" : "1", "endStop" : "2"}
+    {"name" : "2", "startStop" : "1", "endStop" : "2"}
+    {"name" : "3", "startStop" : "1", "endStop" : "2"}
+    {"name" : "4", "startStop" : "1", "endStop" : "2"}
+  ]
+}

@@ -1,7 +1,4 @@
-
-
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +13,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws Exception {
        FXMLLoader loader= new FXMLLoader(getClass().getResource("/layout.fxml"));
        AnchorPane root = loader.load(); 
        Scene scene = new Scene(root);
@@ -24,8 +21,7 @@ public class Main extends Application {
        stage.show();
        MainController controller = loader.getController();
        controller.timeHandle();
-          }
-    
-    
-
+       ReadJSONFile test = new ReadJSONFile();
+       test.parseJSON(loader);
+    }
 }
