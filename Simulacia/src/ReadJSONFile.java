@@ -183,6 +183,7 @@ public class ReadJSONFile {
 	
 	//buses start
 	public void initGenerate(LocalTime time) {
+		
 		if (this.previous == null) this.previous = time;
 		//for all lines
 		for(Line line : this.lines) {
@@ -193,9 +194,8 @@ public class ReadJSONFile {
 			long delay = line.getDelay();
 			int timeS = time.toSecondOfDay();
 			int previousTimeS = this.previous.toSecondOfDay();
-			
 			for(int n = 0; n*delay+startS <= endS; n++) {
-				if(timeS >= startS + (delay*n*60) && previousTimeS < startS + (delay*n*60)) {
+				if(timeS == startS + (delay*n*60) && timeS != previousTimeS ) {
 					Path path = new Path(line.getPath());
 					Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, 0);
 					this.buses.add(bus);
@@ -222,7 +222,6 @@ public class ReadJSONFile {
 	
 	public void generateOnStart(LocalTime time) {
 		//for all lines
-		
 		for(Line line : this.lines) {
 			Path path = new Path(line.getPath());
 			double distance = path.getDistance() / 10;

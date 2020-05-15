@@ -114,6 +114,7 @@ public class MainController extends Main{
 			showSpeed.setText("1.0");
 			LocalTime temp = LocalTime.now();
 			jsonFile.parseJSON(control);
+			jsonFile.generateOnStart(time);
 			int i = 0;
 			temp = temp.minusMinutes(temp.getMinute());
 			while(i <48) {
