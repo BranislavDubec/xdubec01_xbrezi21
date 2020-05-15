@@ -70,8 +70,8 @@ public class MainController {
 			Scale newScale = new Scale();
 			newScale.setPivotX((content.getMaxWidth() - content.getMinWidth()) / 2);
 			newScale.setPivotY((content.getMaxHeight() - content.getMinHeight()) / 2);
-			newScale.setX(1.02 * content.getScaleX());
-			newScale.setY(1.02 * content.getScaleY());
+			newScale.setX(1.1 * content.getScaleX());
+			newScale.setY(1.1 * content.getScaleY());
 			content.getTransforms().add(newScale);
 			content.layout();
 			
@@ -99,15 +99,17 @@ public class MainController {
 			Scale newScale = new Scale();
 			newScale.setPivotX((content.getMaxWidth() - content.getMinWidth()) / 2);
 			newScale.setPivotY((content.getMaxHeight() - content.getMinHeight()) / 2);
-			newScale.setX( content.getScaleX() / 1.02);
-			newScale.setY( content.getScaleY() / 1.02);
+			newScale.setX( content.getScaleX() / 1.1);
+			newScale.setY( content.getScaleY() / 1.1);
 			content.getTransforms().add(newScale);
 			content.layout();
 		}
-		public void timeHandle() {
+		
+		public void timeHandle(ReadJSONFile handle) {
 			
 			showSpeed.setText("1.0");
 			LocalTime temp = LocalTime.now();
+			handle.generateOnStart(temp);
 			int i = 0;
 			temp = temp.minusMinutes(temp.getMinute());
 			while(i <48) {
@@ -119,7 +121,7 @@ public class MainController {
 				temp = temp.plusMinutes(30);
 			}
 			double j = 0;
-			while(j <= 3) {
+			while(j <= 8) {
 				j = Math.round(j * 100.0) / 100.0;
 				speedChoice.getItems().add(Double.toString(j));
 				if(j >1.0) {
@@ -147,11 +149,13 @@ public class MainController {
 							catch(Exception e){
 								showTime.setText(time.toString().substring(0, 5) + ":00");
 							}
-							time = time.plusNanos(period);
+							handle.initGenerate(time);
+							handle.update(time, content, period);
+							time = time.plusNanos(period/100);
 						}
 					});
 				  }
-				},0,period/1000000) ;
+				},0,period/100000000l) ;
 			
 		}
 		

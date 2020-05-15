@@ -20,11 +20,26 @@ public class Path {
 			first = path.get(i);
 			second = path.get(i+1);
 			
-			if(potentionalDistance + coordDistance(first, second) > distance) break;
+			if(potentionalDistance + coordDistance(first, second) > distance) {
+				break;
+			}
 			
 			potentionalDistance += coordDistance(first, second);
 		}
+		double totaldistance = 0;
+		for(int i = 0; i < path.size()-1; i++) {
+			totaldistance += coordDistance(path.get(i), path.get(i+1));
+		}
+		if(distance >= totaldistance) return null;
 		double traveled = (distance - potentionalDistance) / coordDistance(first, second);
-		return Coordinate.create(first.getX() + (first.getX() - second.getX()) * traveled, first.getY() + (first.getY() - second.getY()) * traveled);
+		return Coordinate.create(first.getX() + (second.getX()-first.getX()) * traveled, first.getY() + (second.getY()-first.getY()) * traveled);
+	}
+	
+	public double getDistance() {
+		double totaldistance = 0;
+		for(int i = 0; i < path.size()-1; i++) {
+			totaldistance += coordDistance(path.get(i), path.get(i+1));
+		}
+		return totaldistance;
 	}
 }

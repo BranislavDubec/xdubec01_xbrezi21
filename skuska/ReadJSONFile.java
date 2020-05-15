@@ -1,31 +1,38 @@
 import org.json.simple.JSONObject;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.json.simple.JSONArray;
-import org.json.simple.parser.ParseException;
-import javafx.fxml.FXMLLoader;
 import org.json.simple.parser.JSONParser;
 
+import javafx.scene.layout.Pane;
+
 public class ReadJSONFile {
+	private LocalTime previous;
 	private List<Print> list;
 	private List<Street> streets;
 	private List<Stop> stops;
 	private List<Line> lines;
+	private List<Print> buses;
+	private List<Bus> autobuses;
+	private MainController control;
 	
 	public ReadJSONFile() {
 		this.list = new ArrayList<>();
 		this.streets = new ArrayList<>();
 		this.stops = new ArrayList<>();
 		this.lines = new ArrayList<>();
+		this.buses = new ArrayList<>();
+		this.autobuses = new ArrayList<>();
 	}
 	
 	public void parseJSON(MainController control) throws Exception {
 		parseStreetsAndStops();
 		parseLines();
 		control.printAll(list);
+		this.control = control;
+		 
 	}
 	
 	private void parseStreetsAndStops() throws Exception {
@@ -95,11 +102,14 @@ public class ReadJSONFile {
 			String startStop = (String) stop.get("startStop");
 			String endStop = (String) stop.get("endStop");
 			long delay = (long) stop.get("delay");
-			long startTime = (long) stop.get("startTime");
-			long endTime = (long) stop.get("endTime");
+			String startTimeS = (String) stop.get("startTime");
+			String endTimeS = (String) stop.get("endTime");
 			JSONArray streets = (JSONArray) stop.get("streets");
 			
-			Line line = new Line(lineName);
+			LocalTime startTime = LocalTime.parse(startTimeS);
+			LocalTime endTime = LocalTime.parse(endTimeS);
+			
+			Line line = new Line(lineName, startTime, endTime, delay);
 			
 			boolean found = false;
 			
@@ -166,8 +176,74 @@ public class ReadJSONFile {
 			}
 			
 			this.lines.add(line);
-			Coordinate lel = this.streets.get(19).pointOfIntersection(this.streets.get(19).begin(),this.streets.get(19).end(),this.streets.get(18).begin(),this.streets.get(18).end());
-			System.out.println("X "+lel.getX()+" Y "+lel.getY());
+			line.setPath();
 		}
 	}
+	
+	//buses start
+	public void initGenerate(LocalTime time) {
+		if (this.previous == null) this.previous = time;
+		//for all lines
+		for(Line line : this.lines) {
+			LocalTime start = line.getStartTime();
+			int startS = start.toSecondOfDay();
+			LocalTime end = line.getEndTime();
+			int endS = end.toSecondOfDay();
+			long delay = line.getDelay();
+			int timeS = time.toSecondOfDay();
+			int previousTimeS = this.previous.toSecondOfDay();
+			
+			for(int n = 0; n*delay+startS <= endS; n++) {
+				if(timeS >= startS + (delay*n*60) && previousTimeS < startS + (delay*n*60)) {
+					Path path = new Path(line.getPath());
+					Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, 0);
+					this.buses.add(bus);
+					this.autobuses.add(bus);
+					this.control.printAll(buses);
+					this.buses.clear();
+				}
+			}
+		}
+		this.previous = time;
+	}
+	
+	//move buses
+	public void update(LocalTime time, Pane content, long period) {
+		Bus bus;
+		for(int i = 0; i < this.autobuses.size(); i++) {
+			bus = this.autobuses.get(i);
+			if(!bus.update(period)) {
+				this.autobuses.remove(i);
+				content.getChildren().remove(bus.printable.get(0));
+			}
+		}
+	}
+	
+	public void generateOnStart(LocalTime time) {
+		//for all lines
+		for(Line line : this.lines) {
+			Path path = new Path(line.getPath());
+			double distance = path.getDistance() / 10;
+			LocalTime start = line.getStartTime();
+			int startS = start.toSecondOfDay();
+			LocalTime end = line.getEndTime();
+			int endS = end.toSecondOfDay();
+			long delay = line.getDelay();
+			int timeS = time.toSecondOfDay();
+
+			if(time.toSecondOfDay() >= startS && time.toSecondOfDay() <= endS+distance) {
+				for(int n = 0; n*delay*60+startS <= endS; n++) {
+					if(timeS >= startS + (delay*n*60) && timeS < startS+(delay*n*60)+distance) {
+						Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, (timeS - startS+(delay*n*60))*10);
+						this.buses.add(bus);
+						this.autobuses.add(bus);
+						this.control.printAll(buses);
+						this.buses.clear();
+					}
+				}
+			}
+			
+		}
+	}
+	
 }
