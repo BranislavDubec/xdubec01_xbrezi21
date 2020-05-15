@@ -1,8 +1,24 @@
 {
-  "links" : [
-    {"name" : "1", "startStop" : "1", "endStop" : "2"}
-    {"name" : "2", "startStop" : "1", "endStop" : "2"}
-    {"name" : "3", "startStop" : "1", "endStop" : "2"}
-    {"name" : "4", "startStop" : "1", "endStop" : "2"}
+  "lines" : [
+    {"name" : "1", "startStop" : "1", "endStop" : "2", "delay" : 30, "startTime" : 5, "endTime" : 20,
+      "streets" : [
+          "Bozetechova"
+      ]
+    }
+    {"name" : "2", "startStop" : "1", "endStop" : "4", "delay" : 30, "startTime" : 5, "endTime" : 20,
+      "streets" : [
+
+      ]
+    }
+    {"name" : "3", "startStop" : "1", "endStop" : "3", "delay" : 30, "startTime" : 5, "endTime" : 20,
+      "streets" : [
+          "Bozetechova"
+      ]
+    }
+    {"name" : "4", "startStop" : "2", "endStop" : "4", "delay" : 30, "startTime" : 5, "endTime" : 20,
+      "streets" : [
+          "Sokolovska", "Sokolska"
+      ]
+    }
   ]
 }

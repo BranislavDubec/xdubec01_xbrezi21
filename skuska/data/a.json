@@ -15,11 +15,11 @@
     {"name" : "Brnenska", "startX" : 500, "startY" : 69, "endX" : 650, "endY" : 350}
     {"name" : "Bratislavska", "startX" : 380, "startY" : 500, "endX" : 500, "endY" : 600}
     {"name" : "Kosicka", "startX" : 50, "startY" : 500, "endX" : 250, "endY" : 600}
-    {"name" : "Jihlavska", "startX" : 50, "startY" : 50, "endX" : 100, "endY" : 100}
-    {"name" : "Trebicska", "startX" : 50, "startY" : 50, "endX" : 100, "endY" : 100}
-    {"name" : "Stara", "startX" : 50, "startY" : 50, "endX" : 100, "endY" : 100}
-    {"name" : "Kovarska", "startX" : 50, "startY" : 50, "endX" : 100, "endY" : 100}
-    {"name" : "Kozeluzska", "startX" : 50, "startY" : 50, "endX" : 100, "endY" : 100}
+    {"name" : "Jihlavska", "startX" : 1000, "startY" : 50, "endX" : 1000, "endY" : 100}
+    {"name" : "Trebicska", "startX" : 1000, "startY" : 50, "endX" : 1000, "endY" : 100}
+    {"name" : "Stara", "startX" : 1000, "startY" : 50, "endX" : 1000, "endY" : 100}
+    {"name" : "Kovarska", "startX" : 1250, "startY" : 900, "endX" : 1250, "endY" : 1100}
+    {"name" : "Kozeluzska", "startX" : 1000, "startY" : 1000, "endX" : 1500, "endY" : 1000}
   ] ,
   "stops" : [
     {"name" : "1", "x" : 100, "y" : 50, "street" : "Horni"}

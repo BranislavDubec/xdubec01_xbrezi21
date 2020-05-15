@@ -21,7 +21,8 @@ public class Main extends Application {
        stage.show();
        MainController controller = loader.getController();
        controller.timeHandle();
+       MainController control = loader.getController();
        ReadJSONFile test = new ReadJSONFile();
-       test.parseJSON(loader);
+       test.parseJSON(control);
     }
 }

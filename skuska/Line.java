@@ -13,7 +13,7 @@ public class Line {
     }
 
     public Boolean addStop(Stop stop){
-        if(route.size() == 0 || stop.getStreet().follows(route.get(route.size() - 1).getKey())){
+        if(route.size() == 0 || stop.getStreet().intersects(route.get(route.size() - 1).getKey())){
             route.add(new java.util.AbstractMap.SimpleImmutableEntry<>(stop.getStreet(), stop));
             return true;                
         }
@@ -22,7 +22,7 @@ public class Line {
 
     public Boolean addStreet(Street street){
         if(route.size() == 0) return true;
-        if(street.follows(route.get(route.size() - 1).getKey())){
+        if(street.intersects(route.get(route.size() - 1).getKey())){
             route.add(new java.util.AbstractMap.SimpleImmutableEntry<>(street, null));
             return true;
         }

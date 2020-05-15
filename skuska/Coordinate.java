@@ -1,29 +1,29 @@
 public class Coordinate {
-    private int x, y;
+    private double x, y;
 
-    public static Coordinate create(int xx, int yy) {
-      if (xx < 0 || yy < 0) return null;
+    public static Coordinate create(double x2, double y2) {
+      if (x2 < 0 || y2 < 0) return null;
       Coordinate created = new Coordinate();
-      created.x = xx;
-      created.y = yy;
+      created.x = x2;
+      created.y = y2;
       return created;
     }
   
-    public int diffX(Coordinate c){
-      int abs = this.x - c.x;
+    public double diffX(Coordinate c){
+      double abs = this.x - c.x;
       return abs < 0 ? -abs : abs;
     }
 
-    public int diffY(Coordinate c){
-      int abs = this.y - c.y;
+    public double diffY(Coordinate c){
+      double abs = this.y - c.y;
       return abs < 0 ? -abs : abs;
     }
 
-    public int getX() {
+    public double getX() {
       return this.x;
     }
     
-    public int getY() {
+    public double getY() {
       return this.y;
     }
 
