@@ -1,3 +1,5 @@
+package src;
+
 public class Coordinate {
     private double x, y;
 

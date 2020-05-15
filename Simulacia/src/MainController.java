@@ -1,3 +1,5 @@
+package src;
+
 
 import java.sql.Time;
 import java.text.DateFormat;
@@ -28,7 +30,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Scale;
 
-public class MainController {
+public class MainController extends Main{
 		@FXML
 		private Pane content;
 		@FXML
@@ -45,6 +47,8 @@ public class MainController {
 		private ChoiceBox<String> speedChoice = new ChoiceBox<>();
 		@FXML
 		private Button setValue = new Button();
+		
+		
 		private List<Print> toPrint;
 		private long period = (long) Math.pow(10, 9);
 		private Timer timer = new Timer(false);
@@ -105,11 +109,11 @@ public class MainController {
 			content.layout();
 		}
 		
-		public void timeHandle(ReadJSONFile handle) {
+		public void timeHandle(MainController control) throws Exception {
 			
 			showSpeed.setText("1.0");
 			LocalTime temp = LocalTime.now();
-			handle.generateOnStart(temp);
+			jsonFile.parseJSON(control);
 			int i = 0;
 			temp = temp.minusMinutes(temp.getMinute());
 			while(i <48) {
@@ -149,8 +153,8 @@ public class MainController {
 							catch(Exception e){
 								showTime.setText(time.toString().substring(0, 5) + ":00");
 							}
-							handle.initGenerate(time);
-							handle.update(time, content, period);
+							jsonFile.initGenerate(time);
+							jsonFile.update(time, content, period);
 							time = time.plusNanos(period/100);
 						}
 					});
@@ -168,6 +172,8 @@ public class MainController {
 			showTime.setText(timeChoice.getValue());
 			String temp = showTime.getText() ;
 			time = LocalTime.parse(temp);
+			jsonFile.deleteObjects(content);
+			jsonFile.generateOnStart(time);
 			
 		}
 		

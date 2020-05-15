@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.MainController">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="190.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -24,7 +24,7 @@
                   <ChoiceBox fx:id="timeChoice" layoutX="83.0" layoutY="6.0" maxHeight="60.0" maxWidth="150.0" prefHeight="26.0" prefWidth="126.0" AnchorPane.leftAnchor="83.0" />
                   <Button fx:id="setValue" layoutX="427.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#setValues" prefHeight="26.0" prefWidth="41.0" text="OK" />
                   <ChoiceBox fx:id="speedChoice" layoutX="259.0" layoutY="5.0" prefHeight="26.0" prefWidth="92.0" />
-                  <Label fx:id="showSpeed" layoutX="376.0" layoutY="12.0" text="skap" />
+                  <Label fx:id="showSpeed" layoutX="376.0" layoutY="12.0" text="Label" />
                </children>
             </AnchorPane>
          </items>

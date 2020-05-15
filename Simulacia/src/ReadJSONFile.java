@@ -1,3 +1,5 @@
+package src;
+
 import org.json.simple.JSONObject;
 import java.io.FileReader;
 import java.time.LocalTime;
@@ -31,8 +33,7 @@ public class ReadJSONFile {
 		parseStreetsAndStops();
 		parseLines();
 		control.printAll(list);
-		this.control = control;
-		 
+		this.control = control; 
 	}
 	
 	private void parseStreetsAndStops() throws Exception {
@@ -221,6 +222,7 @@ public class ReadJSONFile {
 	
 	public void generateOnStart(LocalTime time) {
 		//for all lines
+		
 		for(Line line : this.lines) {
 			Path path = new Path(line.getPath());
 			double distance = path.getDistance() / 10;
@@ -230,11 +232,10 @@ public class ReadJSONFile {
 			int endS = end.toSecondOfDay();
 			long delay = line.getDelay();
 			int timeS = time.toSecondOfDay();
-
 			if(time.toSecondOfDay() >= startS && time.toSecondOfDay() <= endS+distance) {
 				for(int n = 0; n*delay*60+startS <= endS; n++) {
 					if(timeS >= startS + (delay*n*60) && timeS < startS+(delay*n*60)+distance) {
-						Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, (timeS - startS+(delay*n*60))*10);
+						Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, (timeS - (startS+(delay*n*60)))*10);
 						this.buses.add(bus);
 						this.autobuses.add(bus);
 						this.control.printAll(buses);
@@ -244,6 +245,14 @@ public class ReadJSONFile {
 			}
 			
 		}
+	}
+	public void deleteObjects(Pane content) {
+
+		for(Bus bus : this.autobuses) {
+			//this.autobuses.remove(bus);
+			content.getChildren().remove(bus.printable.get(0));
+		}
+
 	}
 	
 }
