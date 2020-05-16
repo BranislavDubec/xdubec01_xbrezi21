@@ -29,11 +29,19 @@ public class Bus implements Print{
 		this.timeSchedule = new TimeSchedule(stops, path, start);
 	}
 
-	public boolean update(long period) {
-		this.distance += this.speed * (((double)period/1000000000)/10);
+	public boolean update(long period, List<Street> streets) {
 		Coordinate c = this.path.getCoord(this.distance);
 		Shape shape = this.printable.get(0);
 		if(c == null) return false;
+		double streetSpeed = c.getSpeedofStreet(streets);
+		if(streetSpeed < 1) {
+			this.distance += (this.speed * (((double)period/1000000000)/10) * streetSpeed);
+			this.distance =(double) Math.round(this.distance*1000l)/1000l;
+		}
+		else {
+			this.distance += this.speed * (((double)period/1000000000)/10) ;
+		}
+
 		shape.setTranslateX((c.getX()-this.position.getX())+shape.getTranslateX());
 		shape.setTranslateY((c.getY()-this.position.getY())+shape.getTranslateY());
 		this.position = c;

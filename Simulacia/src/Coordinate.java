@@ -1,5 +1,7 @@
 package src;
 
+import java.util.List;
+
 public class Coordinate {
     private double x, y;
 
@@ -31,6 +33,14 @@ public class Coordinate {
 
     public double distance(Coordinate x) {
     	return Math.sqrt(Math.pow(this.x - x.getX(), 2) + Math.pow(this.y - x.getY(), 2));
+    }
+    public double getSpeedofStreet(List<Street> streets) {
+    	for(Street str : streets) {
+    		if (str.onStreet(this)) {
+    			return 1/str.speed;
+    		}
+    	}
+    	return 1;
     }
     
     @Override

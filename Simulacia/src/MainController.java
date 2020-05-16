@@ -33,8 +33,15 @@ public class MainController extends Main{
 		@FXML
 		private ChoiceBox<String> speedChoice = new ChoiceBox<>();
 		@FXML
-		private Button setValue = new Button();
-		
+		private Button setValueSpeed = new Button();
+		@FXML
+		private Button setValueSpeedStreet = new Button();
+		@FXML
+		private Label showStreetSpeed = new Label();
+		@FXML
+		private ChoiceBox<String> streetChoice = new ChoiceBox<>();
+		@FXML
+		private ChoiceBox<String> streetSpeedChoice = new ChoiceBox<>();
 		
 		private List<Print> toPrint;
 		private long period = (long) Math.pow(10, 9);
@@ -113,8 +120,12 @@ public class MainController extends Main{
 				temp = temp.plusMinutes(30);
 			}
 			double j = 0;
-			while(j <= 8) {
+			while(j <= 5) {
 				j = Math.round(j * 100.0) / 100.0;
+				if(j == 3) {
+					j++;
+					continue;
+				}
 				speedChoice.getItems().add(Double.toString(j));
 				if(j >1.0) {
 					speedChoice.setValue("1.0");
@@ -125,10 +136,27 @@ public class MainController extends Main{
 					
 				}
 				else {
+					
 					j+=1;
 				}
 			}
+			for(Street street :  jsonFile.streets) {
+				streetChoice.getItems().add(street.ID);
+			}
+			j = 1;
 			
+			while(j <= 10) {
+				streetSpeedChoice.getItems().add(Double.toString(j));
+				if(j >1.0) {
+					
+					streetSpeedChoice.setValue("1.0");
+					
+				}
+				j++;
+				
+			}
+			showStreetSpeed.setText("1");
+			streetChoice.setValue(jsonFile.streets.get(0).getId());
 			timer.scheduleAtFixedRate(new TimerTask() {
 				@Override
 				public void run() {
@@ -151,20 +179,33 @@ public class MainController extends Main{
 			
 		}
 		
+
 		@FXML
-		void setValues(MouseEvent event) {
+		void setValueSpeed(MouseEvent event) {
 			event.consume();
-			showSpeed.setText(speedChoice.getValue());
-			double tmp = Double.parseDouble(showSpeed.getText())*1000000000;
-			period = (long) tmp;
 			showTime.setText(timeChoice.getValue());
 			String temp = showTime.getText() ;
 			time = LocalTime.parse(temp);
 			jsonFile.deleteObjects(content);
+			
+			showSpeed.setText(speedChoice.getValue());
+			double tmp = Double.parseDouble(showSpeed.getText())*1000000000;
+			period = (long) tmp;
+			
 			jsonFile.generateOnStart(time);
 			
 		}
-		
+		@FXML
+		void setValueSpeedStreet(MouseEvent event) {
+			event.consume();
+			showStreetSpeed.setText(streetSpeedChoice.getValue());
+			String a = streetChoice.getValue();
+			for	(Street street : jsonFile.streets) {
+				if(a == street.getId()) {
+					street.speed = Double.parseDouble(streetSpeedChoice.getValue());
+				}
+			}
+		}
 		public void printAll(List<Print> toPrint) {
 			this.toPrint = toPrint;
 			

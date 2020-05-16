@@ -13,13 +13,13 @@ import javafx.scene.layout.Pane;
 public class ReadJSONFile {
 	private LocalTime previous;
 	private List<Print> list;
-	private List<Street> streets;
 	private List<Stop> stops;
 	private List<Line> lines;
 	private List<Print> buses;
 	private List<Bus> autobuses;
 	private MainController control;
 	
+	public List<Street> streets;
 	public ReadJSONFile() {
 		this.list = new ArrayList<>();
 		this.streets = new ArrayList<>();
@@ -267,7 +267,7 @@ public class ReadJSONFile {
 				}
 			}
 			if(!bus.wait) {
-				if(!bus.update(period)) {
+				if(!bus.update(period,this.streets)) {
 					this.autobuses.remove(i);
 					content.getChildren().remove(bus.printable.get(0));
 				}	

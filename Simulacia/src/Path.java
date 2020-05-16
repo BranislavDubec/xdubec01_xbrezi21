@@ -44,7 +44,7 @@ public class Path {
 			totaldistance += coordDistance(path.get(i), path.get(i+1));
 			for(int j = 0; j < stops.size(); j++) {
 				if(stops.get(j).getCoordinate().equals(path.get(i))) {
-					//totaldistance += 50;                     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
+					totaldistance += 50;                     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
 				}	
 			}
 		}

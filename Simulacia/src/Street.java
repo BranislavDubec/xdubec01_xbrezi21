@@ -8,15 +8,18 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 
 public class Street implements Print{
-    private String ID;
+
     private Coordinate start;
     private Coordinate end;
     private List<Stop> street_stops = new ArrayList<Stop>();
     
+    public double speed;
+    public String ID;
     public Street(String ID, Coordinate start, Coordinate end){
         this.ID = ID;
         this.start = start;
         this.end = end;
+        this.speed = 1;
     }
 
     public Coordinate begin(){
@@ -47,7 +50,7 @@ public class Street implements Print{
     	}
     }
     
-    private boolean onStreet(Coordinate c) {
+    public boolean onStreet(Coordinate c) {
     	if(c.distance(begin()) + c.distance(end()) == begin().distance(end()) ) return true;
     	else return false;
     }
