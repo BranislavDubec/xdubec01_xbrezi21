@@ -22,7 +22,7 @@ public class TimeSchedule {
 	public List<Pair<LocalTime, String>> getTimes() {
 		return this.stopsTime;
 	}
-	
+	//
 	public void setTimes() {
 		double A = 0;
 		for(int i = 1; i < path.size(); i++) {
