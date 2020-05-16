@@ -13,6 +13,8 @@ public class Bus implements Print{
 	private double speed;
 	public List<Shape> printable;
 	private Path path;
+	public boolean wait;
+	public double timeWait;
 	
 	public Bus(Coordinate position, double speed, Path path, double distance) {
 		this.position = position;
@@ -21,6 +23,7 @@ public class Bus implements Print{
 		this.printable = new ArrayList<>();
 		this.printable.add(new Circle(position.getX(), position.getY(), 5, Color.BLUE));
 		this.path = path;
+		this.wait = false;
 	}
 
 	public boolean update(long period) {
@@ -37,5 +40,13 @@ public class Bus implements Print{
 	@Override
 	public List<Shape> printShapes() {
 		return printable;
+	}
+	
+	public Coordinate getPosition() {
+		return this.position;
+	}
+	
+	public Path getPath() {
+		return this.path;
 	}
 }

@@ -40,7 +40,7 @@ public class Coordinate {
       }
   
       Coordinate fml = (Coordinate) o;
-      if (this.getX() == fml.getX() && this.getY() == fml.getY()) {
+      if (Math.round(this.getX()*10000000) == Math.round(fml.getX()*10000000) && Math.round(this.getY()*10000000) == Math.round(fml.getY()*10000000)) {
         return true;
       }
       else {

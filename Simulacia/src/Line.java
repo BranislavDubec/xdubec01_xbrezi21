@@ -41,7 +41,7 @@ public class Line {
     }
 
     public Boolean addStop(Stop stop){
-        if(route.size() == 0 || stop.getStreet().intersects(route.get(route.size() - 1).getKey())){
+        if(route.size() == 0 || stop.getStreet().intersects(route.get(route.size() - 1).getKey()) || stop.getStreet().equals(route.get(route.size() - 1).getKey())){
             route.add(new java.util.AbstractMap.SimpleImmutableEntry<>(stop.getStreet(), stop));
             return true;                
         }
@@ -61,7 +61,12 @@ public class Line {
     	this.path.clear();
     	this.path.add(getRoute().get(0).getValue().getCoordinate());
     	for(int i = 0; i < this.route.size() - 1; i++) {
-    		this.path.add(getRoute().get(i).getKey().pointOfIntersection(getRoute().get(i).getKey().begin(), getRoute().get(i).getKey().end(), getRoute().get(i+1).getKey().begin(), getRoute().get(i+1).getKey().end()));
+    		if(getRoute().get(i).getValue() != null) {
+    			this.path.add(getRoute().get(i).getValue().getCoordinate());
+    		}
+    		if(!getRoute().get(i).getKey().equals(getRoute().get(i+1).getKey())) {
+    			this.path.add(getRoute().get(i).getKey().pointOfIntersection(getRoute().get(i).getKey().begin(), getRoute().get(i).getKey().end(), getRoute().get(i+1).getKey().begin(), getRoute().get(i+1).getKey().end()));
+    		}
     	}
     	this.path.add(getRoute().get(this.route.size()-1).getValue().getCoordinate());
     }

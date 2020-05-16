@@ -106,14 +106,13 @@ public class ReadJSONFile {
 			String startTimeS = (String) stop.get("startTime");
 			String endTimeS = (String) stop.get("endTime");
 			JSONArray streets = (JSONArray) stop.get("streets");
-			
+			JSONArray JSONstops = (JSONArray) stop.get("stops");
 			LocalTime startTime = LocalTime.parse(startTimeS);
 			LocalTime endTime = LocalTime.parse(endTimeS);
 			
 			Line line = new Line(lineName, startTime, endTime, delay);
 			
 			boolean found = false;
-			
 			for(int j = 0; j < this.stops.size(); j++) {
 				if(this.stops.get(j).getId().equals(startStop)) {
 					if(line.addStop(this.stops.get(j))) {
@@ -126,7 +125,6 @@ public class ReadJSONFile {
 					}
 				}
 			}
-			
 			if(!found) {
 				System.err.println("startStop not found");
 				System.exit(1);
@@ -135,29 +133,56 @@ public class ReadJSONFile {
 			//streets on line
 			for(int j = 0; j < streets.size(); j++) {
 				String street = (String) streets.get(j);
+				JSONArray someStop = (JSONArray) JSONstops.get(j);
+				String otherStop = (String) someStop.get(0);
 				
 				found = false;
-				//find if streets exist and follow each other
-				for(int k = 0; k < this.streets.size(); k++) {
-					if(this.streets.get(k).getId().equals(street)) {
-						if(line.addStreet(this.streets.get(k))) {
-							found = true;
-							break;
+				if(!otherStop.equals("none")) {
+					//for all stops in JSON on one street
+					for(int k = 0; k < someStop.size();k++) {
+						//comparing with existing stops
+						for(int l = 0; l < this.stops.size(); l++) {
+							otherStop = (String) (someStop.get(k));
+							if(this.stops.get(l).getId().equals(otherStop)) {							
+								if(line.addStop(this.stops.get(l))) {
+									found = true;
+									break;
+								}
+								else {
+									System.err.println("Streets on line dont follow each other");
+									System.exit(1);
+								}
+							}							
 						}
-						else {
-							System.err.println("Streets on line dont follow each other");
+						if(!found) {
+							System.err.println("Stop not found");
 							System.exit(1);
 						}
 					}
 				}
-				if(!found) {
-					System.err.println("Street not found");
-					System.exit(1);
+				else {
+					//find if streets exist and follow each other
+					for(int k = 0; k < this.streets.size(); k++) {
+						
+						if(this.streets.get(k).getId().equals(street)) {
+							if(line.addStreet(this.streets.get(k))) {
+								found = true;
+								break;
+							}
+							else {
+								System.err.println("Streets on line dont follow each other");
+								System.exit(1);
+							}
+						}
+					}
+					if(!found) {
+						System.err.println("Street not found");
+						System.exit(1);
+					}
 				}
 			}
 			
 			found = false;
-			
 			for(int j = 0; j < this.stops.size(); j++) {
 				if(this.stops.get(j).getId().equals(endStop)) {
 					if(line.addStop(this.stops.get(j))) {
@@ -170,14 +195,13 @@ public class ReadJSONFile {
 					}
 				}
 			}
-			
 			if(!found) {
 				System.err.println("endStop not found");
 				System.exit(1);
 			}
-			
 			this.lines.add(line);
 			line.setPath();
+			
 		}
 	}
 	
@@ -213,9 +237,33 @@ public class ReadJSONFile {
 		Bus bus;
 		for(int i = 0; i < this.autobuses.size(); i++) {
 			bus = this.autobuses.get(i);
-			if(!bus.update(period)) {
-				this.autobuses.remove(i);
-				content.getChildren().remove(bus.printable.get(0));
+			for(int j = 0; j < this.stops.size(); j++) {				
+				if(this.stops.get(j).getCoordinate().equals(bus.getPosition())) {
+					for(int k = 2; k < bus.getPath().getPath().size(); k++) {
+						if(bus.getPosition().equals(bus.getPath().getPath().get(k))) {
+							if(bus.wait == true) {
+								if(bus.timeWait != 0) {
+									bus.timeWait--;
+								}
+								else {
+									//bus.getPath().getPath().remove(bus.getPath().getPath().get(k));
+									bus.wait = false;
+									bus.timeWait = 500/ (((double)period/1000000000));
+								}
+							}
+							else {
+								bus.wait = true;
+								bus.timeWait = 500 / (((double)period/1000000000));
+							}
+						}
+					}
+				}
+			}
+			if(!bus.wait) {
+				if(!bus.update(period)) {
+					this.autobuses.remove(i);
+					content.getChildren().remove(bus.printable.get(0));
+				}	
 			}
 		}
 	}
@@ -224,7 +272,7 @@ public class ReadJSONFile {
 		//for all lines
 		for(Line line : this.lines) {
 			Path path = new Path(line.getPath());
-			double distance = path.getDistance() / 10;
+			double distance = path.getDistance(this.stops) / 10;
 			LocalTime start = line.getStartTime();
 			int startS = start.toSecondOfDay();
 			LocalTime end = line.getEndTime();
@@ -242,9 +290,9 @@ public class ReadJSONFile {
 					}
 				}
 			}
-			
 		}
 	}
+
 	public void deleteObjects(Pane content) {
 
 		for(Bus bus : this.autobuses) {
