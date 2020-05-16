@@ -26,5 +26,7 @@
     {"name" : "2", "x" : 200, "y" : 100, "street" : "Jarosova"}
     {"name" : "3", "x" : 250, "y" : 220, "street" : "Sokolovska"}
     {"name" : "4", "x" : 500, "y" : 360, "street" : "Dolni"}
+    {"name" : "5", "x" : 50, "y" : 200, "street" : "Nova"}
+    {"name" : "6", "x" : 50, "y" : 400, "street" : "Nova"}
   ]
 }

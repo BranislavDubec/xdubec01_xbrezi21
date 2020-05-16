@@ -10,6 +10,7 @@ public class Line {
     private LocalTime startTime;
     private LocalTime endTime;
     private List<Coordinate> path;
+    public List<Stop> stops;
 
     public Line(String s, LocalTime startTime, LocalTime endTime, long delay){
         this.id = s;
@@ -17,6 +18,7 @@ public class Line {
         this.endTime = endTime;
         this.delay = delay;
         this.path = new ArrayList<>();
+        this.stops = new ArrayList<>();
     }
     
     public LocalTime getStartTime() {
@@ -43,6 +45,7 @@ public class Line {
     public Boolean addStop(Stop stop){
         if(route.size() == 0 || stop.getStreet().intersects(route.get(route.size() - 1).getKey()) || stop.getStreet().equals(route.get(route.size() - 1).getKey())){
             route.add(new java.util.AbstractMap.SimpleImmutableEntry<>(stop.getStreet(), stop));
+            this.stops.add(stop);
             return true;                
         }
         return false;

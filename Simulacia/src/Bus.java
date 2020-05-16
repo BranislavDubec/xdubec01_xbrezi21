@@ -1,6 +1,7 @@
 package src;
 
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.paint.Color;
@@ -15,8 +16,9 @@ public class Bus implements Print{
 	private Path path;
 	public boolean wait;
 	public double timeWait;
+	private TimeSchedule timeSchedule;
 	
-	public Bus(Coordinate position, double speed, Path path, double distance) {
+	public Bus(Coordinate position, double speed, Path path, double distance, List<Stop> stops, LocalTime start) {
 		this.position = position;
 		this.speed = speed;
 		this.distance = distance;
@@ -24,6 +26,7 @@ public class Bus implements Print{
 		this.printable.add(new Circle(position.getX(), position.getY(), 5, Color.BLUE));
 		this.path = path;
 		this.wait = false;
+		this.timeSchedule = new TimeSchedule(stops, path, start);
 	}
 
 	public boolean update(long period) {
@@ -48,5 +51,9 @@ public class Bus implements Print{
 	
 	public Path getPath() {
 		return this.path;
+	}
+	
+	public TimeSchedule getTimeSchedule() {
+		return this.timeSchedule;
 	}
 }

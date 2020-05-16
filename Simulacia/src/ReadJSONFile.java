@@ -39,7 +39,7 @@ public class ReadJSONFile {
 	private void parseStreetsAndStops() throws Exception {
 		
 		JSONParser parser = new JSONParser();	
-		FileReader reader = new FileReader("data/a.json");
+		FileReader reader = new FileReader("data/ulice.json");
 		JSONObject obj = (JSONObject) parser.parse(reader);
 		JSONArray streets = (JSONArray) obj.get("streets");
 		JSONArray stops = (JSONArray) obj.get("stops");
@@ -93,7 +93,7 @@ public class ReadJSONFile {
 	private void parseLines() throws Exception {
 		
 		JSONParser parser = new JSONParser();	
-		FileReader reader = new FileReader("data/b.json");
+		FileReader reader = new FileReader("data/linky.json");
 		JSONObject obj = (JSONObject) parser.parse(reader);
 		JSONArray lines = (JSONArray) obj.get("lines");
 		//lines
@@ -116,6 +116,7 @@ public class ReadJSONFile {
 			for(int j = 0; j < this.stops.size(); j++) {
 				if(this.stops.get(j).getId().equals(startStop)) {
 					if(line.addStop(this.stops.get(j))) {
+						
 						found = true;
 						break;
 					}
@@ -145,6 +146,7 @@ public class ReadJSONFile {
 							otherStop = (String) (someStop.get(k));
 							if(this.stops.get(l).getId().equals(otherStop)) {							
 								if(line.addStop(this.stops.get(l))) {
+									
 									found = true;
 									break;
 								}
@@ -221,7 +223,12 @@ public class ReadJSONFile {
 			for(int n = 0; n*delay+startS <= endS; n++) {
 				if(timeS == startS + (delay*n*60) && timeS != previousTimeS ) {
 					Path path = new Path(line.getPath());
-					Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, 0);
+					Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, 0, line.stops, time);
+					bus.getTimeSchedule().setTimes();
+					//int temp = (bus.getTimeSchedule().getTimes().size());
+					/*for(int i = 0; i < temp; i++) {
+						System.out.println("TIME : "+bus.getTimeSchedule().getTimes().get(i).getKey().toString()+" STOP : "+bus.getTimeSchedule().getTimes().get(i).getValue());
+					}*/
 					this.buses.add(bus);
 					this.autobuses.add(bus);
 					this.control.printAll(buses);
@@ -282,7 +289,7 @@ public class ReadJSONFile {
 			if(time.toSecondOfDay() >= startS && time.toSecondOfDay() <= endS+distance) {
 				for(int n = 0; n*delay*60+startS <= endS; n++) {
 					if(timeS >= startS + (delay*n*60) && timeS < startS+(delay*n*60)+distance) {
-						Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, (timeS - (startS+(delay*n*60)))*10);
+						Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, (timeS - (startS+(delay*n*60)))*10, line.stops, time);
 						this.buses.add(bus);
 						this.autobuses.add(bus);
 						this.control.printAll(buses);
