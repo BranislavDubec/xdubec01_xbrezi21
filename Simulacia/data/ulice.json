@@ -1,0 +1,57 @@
+{
+  "streets" : [
+    {"name" : "Nova", "startX" : 210, "startY" : 850, "endX" : 210, "endY" : 400}
+    {"name" : "Stara", "startX" : 210, "startY" : 400, "endX" : 400, "endY" : 400}
+    {"name" : "Horni", "startX" : 400, "startY" : 400, "endX" : 700, "endY" : 450}
+    {"name" : "Sokolska", "startX" : 700, "startY" : 450, "endX" : 700, "endY" : 150}
+    {"name" : "Bolzanova", "startX" : 700, "startY" : 150, "endX" : 850, "endY" : 150}
+    {"name" : "Moravcikova", "startX" : 500, "startY" : 417, "endX" : 500, "endY" : 220}
+    {"name" : "Holleho", "startX" : 500, "startY" : 330, "endX" : 700, "endY" : 330}
+    {"name" : "KFTS", "startX" : 600, "startY" : 330, "endX" : 600, "endY" : 220}
+    {"name" : "Trpka", "startX" : 650, "startY" : 330, "endX" : 650, "endY" : 220}
+    {"name" : "Alexieho", "startX" : 600, "startY" : 220, "endX" : 700, "endY" : 220}
+    {"name" : "17.Novembra", "startX" : 470, "startY" : 412, "endX" : 470, "endY" : 900}
+    {"name" : "Vlhka", "startX" : 470, "startY" : 700, "endX" : 430, "endY" : 700}
+    {"name" : "Smrekova", "startX" : 470, "startY" : 800, "endX" : 350, "endY" : 800}
+    {"name" : "Kratka", "startX" : 350, "startY" : 800, "endX" : 350, "endY" : 900}
+    {"name" : "Javorova", "startX" : 520, "startY" : 419, "endX" :520, "endY" : 680}
+    {"name" : "Dubova", "startX" : 620, "startY" : 438, "endX" :620, "endY" : 900}
+    {"name" : "Kollarova", "startX" : 470, "startY" : 550, "endX" :1100, "endY" : 550}
+    {"name" : "Bozetechova", "startX" : 900, "startY" : 550, "endX" :900, "endY" : 180}
+    {"name" : "Pilsner", "startX" : 470, "startY" : 680, "endX" :800, "endY" : 680}
+    {"name" : "Corgon", "startX" : 700, "startY" : 450, "endX" :700, "endY" : 780}
+    {"name" : "Radeqast", "startX" : 470, "startY" : 900, "endX" :850, "endY" : 900}
+    {"name" : "Svijany", "startX" : 850, "startY" : 680, "endX" :850, "endY" : 950}
+    {"name" : "Budvar", "startX" : 700, "startY" : 780, "endX" :470, "endY" : 780}
+  ] ,
+  "stops" : [
+      {"name" : "1", "x" : 210, "y" : 830, "street" : "Nova"}
+      {"name" : "2", "x" : 210, "y" : 450, "street" : "Nova"}
+      {"name" : "3", "x" : 300, "y" : 400, "street" : "Stara"}
+      {"name" : "4", "x" : 500, "y" : 300, "street" : "Moravcikova"}
+      {"name" : "5", "x" : 600, "y" : 330, "street" : "Holleho"}
+      {"name" : "6", "x" : 650, "y" : 220, "street" : "Alexieho"}
+      {"name" : "7", "x" : 800, "y" : 150, "street" : "Bolzanova"}
+      {"name" : "8", "x" : 700, "y" : 430, "street" : "Sokolska"}
+      {"name" : "9", "x" : 900, "y" : 220, "street" : "Bozetechova"}
+      {"name" : "10", "x" : 470, "y" : 440, "street" : "17.Novembra"}
+      {"name" : "11", "x" : 470, "y" : 600, "street" : "17.Novembra"}
+      {"name" : "12", "x" : 470, "y" : 750, "street" : "17.Novembra"}
+      {"name" : "13", "x" : 520, "y" : 440, "street" : "Javorova"}
+      {"name" : "14", "x" : 520, "y" : 660, "street" : "Javorova"}
+      {"name" : "15", "x" : 700, "y" : 460, "street" : "Corgon"}
+      {"name" : "16", "x" : 700, "y" : 660, "street" : "Corgon"}
+      {"name" : "17", "x" : 700, "y" : 750, "street" : "Corgon"}
+      {"name" : "18", "x" : 620, "y" : 480, "street" : "Dubova"}
+      {"name" : "19", "x" : 620, "y" : 660, "street" : "Dubova"}
+      {"name" : "20", "x" : 620, "y" : 880, "street" : "Dubova"}
+      {"name" : "21", "x" : 1000, "y" : 550, "street" : "Kollarova"}
+      {"name" : "22", "x" : 860, "y" : 550, "street" : "Kollarova"}
+      {"name" : "23", "x" : 600, "y" : 550, "street" : "Kollarova"}
+      {"name" : "24", "x" : 580, "y" : 680, "street" : "Pilsner"}
+      {"name" : "25", "x" : 680, "y" : 680, "street" : "Pilsner"}
+      {"name" : "26", "x" : 450, "y" : 700, "street" : "Vlhka"}
+      {"name" : "27", "x" : 350, "y" : 850, "street" : "Kratka"}
+      {"name" : "28", "x" : 850, "y" : 940, "street" : "Svijany"}
+  ]
+}
