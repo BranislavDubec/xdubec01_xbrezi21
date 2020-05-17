@@ -10,16 +10,17 @@ public class Stop implements Print{
     private String id;
     private Coordinate coordinates = null;
     private Street stop_street = null;
-    
-    public Stop(String s, Coordinate c){
+    public String var;
+    public Stop(String s, Coordinate c, String var){
         this.id = s;
         this.coordinates = c;
+        this.var = var;
     }
 
     public String getId(){
         return this.id;
     }
-
+    
     public Coordinate getCoordinate(){
         return this.coordinates;
     }

@@ -63,9 +63,9 @@ public class ReadJSONFile {
 			long x = (long) stop.get("x");
 			long y = (long) stop.get("y");
 			String stopStreet = (String) stop.get("street");
-
-			Stop stopL = new Stop(stopName, Coordinate.create((int)x, (int)y));
-			
+			String var = (String) stop.get("var");
+			Stop stopL = new Stop(stopName, Coordinate.create((int)x, (int)y),var);
+				
 			Boolean isOnStreet = false;
 			for(int j = 0; j < streets.size(); j++) {
 				Street current = (Street) this.streets.get(j);

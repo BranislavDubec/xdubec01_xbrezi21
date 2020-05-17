@@ -29,7 +29,7 @@ public class TimeSchedule {
 		for(int i = 1; i < path.size(); i++) {
 			for(Stop stop : stops) {
 				if(path.get(i).equals(stop.getCoordinate())) {
-					this.stopsTime.add(new Pair<LocalTime, String>(this.start.plusSeconds((long)A/10), stop.getId()));
+					this.stopsTime.add(new Pair<LocalTime, String>(this.start.plusSeconds((long)A/10), stop.var));
 					A += 50;
 					if(i == 1) A -= 100;
 					break;

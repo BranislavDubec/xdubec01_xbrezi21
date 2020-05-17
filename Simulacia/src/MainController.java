@@ -226,6 +226,8 @@ public class MainController extends Main{
 									schedule.setOpacity(1);
 									double y = 10;
 									schedule.setPrefSize(250, 200);
+									Label writepar = new Label();
+									writepar.setText(print.);
 									List<Pair<LocalTime, String>> temp = ((Bus) print).getTimeSchedule().getTimes();
 									for (Pair<LocalTime,String> a : temp) {
 										Label writeTime = new Label();

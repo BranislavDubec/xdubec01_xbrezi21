@@ -23,33 +23,33 @@
     {"name" : "Budvar", "startX" : 700, "startY" : 780, "endX" :470, "endY" : 780}
   ] ,
   "stops" : [
-      {"name" : "1", "x" : 210, "y" : 830, "street" : "Nova"}
-      {"name" : "2", "x" : 210, "y" : 450, "street" : "Nova"}
-      {"name" : "3", "x" : 300, "y" : 400, "street" : "Horni"}
-      {"name" : "4", "x" : 500, "y" : 300, "street" : "Moravcikova"}
-      {"name" : "5", "x" : 630, "y" : 330, "street" : "Holleho"}
-      {"name" : "6", "x" : 660, "y" : 220, "street" : "Alexieho"}
-      {"name" : "7", "x" : 800, "y" : 150, "street" : "Bolzanova"}
-      {"name" : "8", "x" : 700, "y" : 380, "street" : "Corgon"}
-      {"name" : "9", "x" : 900, "y" : 220, "street" : "Bozetechova"}
-      {"name" : "10", "x" : 470, "y" : 440, "street" : "17.Novembra"}
-      {"name" : "11", "x" : 470, "y" : 600, "street" : "17.Novembra"}
-      {"name" : "12", "x" : 470, "y" : 750, "street" : "17.Novembra"}
-      {"name" : "13", "x" : 520, "y" : 440, "street" : "Javorova"}
-      {"name" : "14", "x" : 520, "y" : 660, "street" : "Javorova"}
-      {"name" : "15", "x" : 700, "y" : 460, "street" : "Corgon"}
-      {"name" : "16", "x" : 700, "y" : 660, "street" : "Corgon"}
-      {"name" : "17", "x" : 700, "y" : 750, "street" : "Corgon"}
-      {"name" : "18", "x" : 620, "y" : 480, "street" : "Dubova"}
-      {"name" : "19", "x" : 620, "y" : 660, "street" : "Dubova"}
-      {"name" : "20", "x" : 620, "y" : 880, "street" : "Dubova"}
-      {"name" : "21", "x" : 1000, "y" : 550, "street" : "Kollarova"}
-      {"name" : "22", "x" : 860, "y" : 550, "street" : "Kollarova"}
-      {"name" : "23", "x" : 600, "y" : 550, "street" : "Kollarova"}
-      {"name" : "24", "x" : 580, "y" : 680, "street" : "Pilsner"}
-      {"name" : "25", "x" : 680, "y" : 680, "street" : "Pilsner"}
-      {"name" : "26", "x" : 450, "y" : 700, "street" : "Vlhka"}
-      {"name" : "27", "x" : 350, "y" : 850, "street" : "Kratka"}
-      {"name" : "28", "x" : 850, "y" : 940, "street" : "Svijany"}
+      {"name" : "1", "x" : 210, "y" : 830, "street" : "Nova", "var" : "Nova Dole"}
+      {"name" : "2", "x" : 210, "y" : 450, "street" : "Nova","var" : "Nova Hore"}
+      {"name" : "3", "x" : 300, "y" : 400, "street" : "Horni", "var" : "Horni"}
+      {"name" : "4", "x" : 500, "y" : 300, "street" : "Moravcikova" ,"var" : "Moravcikova"}
+      {"name" : "5", "x" : 630, "y" : 330, "street" : "Holleho","var" : "Holleho"}
+      {"name" : "6", "x" : 660, "y" : 220, "street" : "Alexieho","var" : "Alexieho"}
+      {"name" : "7", "x" : 800, "y" : 150, "street" : "Bolzanova","var" : "Bolzanova"}
+      {"name" : "8", "x" : 700, "y" : 380, "street" : "Corgon","var" : "Corgon Hore"}
+      {"name" : "9", "x" : 900, "y" : 220, "street" : "Bozetechova","var" : "Bozetechova"}
+      {"name" : "10", "x" : 470, "y" : 440, "street" : "17.Novembra","var" : "17.Novembra hore"}
+      {"name" : "11", "x" : 470, "y" : 600, "street" : "17.Novembra","var" : "17.Novembra stred"}
+      {"name" : "12", "x" : 470, "y" : 750, "street" : "17.Novembra","var" : "17.Novembra dole"}
+      {"name" : "13", "x" : 520, "y" : 440, "street" : "Javorova","var" : "Javorova hore"}
+      {"name" : "14", "x" : 520, "y" : 660, "street" : "Javorova","var" : "Javorova dole"}
+      {"name" : "15", "x" : 700, "y" : 460, "street" : "Corgon","var" : "Corgon stred"}
+      {"name" : "16", "x" : 700, "y" : 660, "street" : "Corgon","var" : "Corgon dole"}
+      {"name" : "17", "x" : 700, "y" : 750, "street" : "Corgon","var" : "Corgon dolny koniec"}
+      {"name" : "18", "x" : 620, "y" : 480, "street" : "Dubova","var" : "Dubova Hore"}
+      {"name" : "19", "x" : 620, "y" : 660, "street" : "Dubova","var" : "Dubova stred"}
+      {"name" : "20", "x" : 620, "y" : 880, "street" : "Dubova","var" : "Dubova dole"}
+      {"name" : "21", "x" : 1000, "y" : 550, "street" : "Kollarova","var" : "Kollarova hore"}
+      {"name" : "22", "x" : 860, "y" : 550, "street" : "Kollarova","var" : "Kollarova stred"}
+      {"name" : "23", "x" : 600, "y" : 550, "street" : "Kollarova","var" : "Kollarova dole"}
+      {"name" : "24", "x" : 580, "y" : 680, "street" : "Pilsner","var" : "Pilsner Hore"}
+      {"name" : "25", "x" : 680, "y" : 680, "street" : "Pilsner","var" : "Pilsner dole"}
+      {"name" : "26", "x" : 450, "y" : 700, "street" : "Vlhka","var" : "Vlhka"}
+      {"name" : "27", "x" : 350, "y" : 850, "street" : "Kratka","var" : "Kratka"}
+      {"name" : "28", "x" : 850, "y" : 940, "street" : "Svijany","var" : "Svijany"}
   ]
 }
