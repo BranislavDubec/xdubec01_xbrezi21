@@ -1,0 +1,28 @@
+{
+  "lines" : [
+    {"name" : "1", "startStop" : "1", "endStop" : "28", "delay" : 3, "startTime" : "05:30:02", "endTime" : "22:30:00",
+      "streets" : [
+          "Nova",  "Horni", "Dubova", "Radeqast"
+      ],
+      "stops" : [
+          ["2"], ["3"],  ["18", "19", "20"], ["none"]
+      ]
+    }
+    {"name" : "2", "startStop" : "7", "endStop" : "27", "delay" : 2, "startTime" : "05:30:02", "endTime" : "22:30:00",
+      "streets" : [
+          "Corgon", "Alexieho", "KFTS", "Holleho", "Moravcikova", "Horni", "17.Novembra", "Smrekova"
+      ],
+      "stops" : [
+          ["none"], ["6"], ["none"], ["none"], ["4"], ["none"], ["10", "11", "12"], ["none"]
+      ]
+    }
+    {"name" : "3", "startStop" : "9", "endStop" : "27", "delay" : 1, "startTime" : "05:30:02", "endTime" : "22:30:00",
+      "streets" : [
+          "Kollarova", "Corgon", "Holleho", "Moravcikova", "Horni", "Javorova", "Pilsner", "17.Novembra", "Smrekova"
+      ],
+      "stops" : [
+          ["21", "22"], ["15", "8"], ["5"], ["none"], ["none"], ["13", "14"], ["none"], ["none"], ["none"]
+      ]
+    }
+  ]
+}
