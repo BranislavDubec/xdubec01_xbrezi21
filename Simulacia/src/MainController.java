@@ -1,3 +1,11 @@
+/**
+* The MainController class is used to controll user actions
+*
+* @author  Jindrich Brezina, Branislav Dubec
+* @version 1.0
+* @since   14. 5. 2020
+*/
+
 package src;
 
 
