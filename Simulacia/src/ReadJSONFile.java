@@ -1,3 +1,11 @@
+/**
+* The ReadJSONFile class is created to read information from .json files and make all kinds of classes from them.
+*
+* @author  Jindrich Brezina, Branislav Dubec
+* @version 1.0
+* @since   14. 5. 2020
+*/
+
 package src;
 
 import org.json.simple.JSONObject;
@@ -32,6 +40,11 @@ public class ReadJSONFile {
 		this.autobuses = new ArrayList<>();
 	}
 	
+	/**
+     * This method is used make basic classes from json files.
+     * @param control main anchor pane
+     * @param box choice box
+     */
 	public void parseJSON(MainController control,ChoiceBox box) throws Exception {
 		parseStreetsAndStops();
 		parseLines(box);
@@ -39,6 +52,9 @@ public class ReadJSONFile {
 		this.control = control; 
 	}
 	
+	/**
+     * This method is used make Streets and Stops from json files.
+     */
 	private void parseStreetsAndStops() throws Exception {
 		
 		JSONParser parser = new JSONParser();	
@@ -93,6 +109,9 @@ public class ReadJSONFile {
 		}		
 	}
 	
+		/**
+     * This method is used make Lines from json files.
+     */
 	private void parseLines(ChoiceBox box) throws Exception {
 		
 		JSONParser parser = new JSONParser();	
