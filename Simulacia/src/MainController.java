@@ -51,6 +51,8 @@ public class MainController extends Main{
 		@FXML
 		private ChoiceBox<String> speedChoice = new ChoiceBox<>();
 		@FXML
+		private ChoiceBox<String> chooseStreet = new ChoiceBox<>();
+		@FXML
 		private ChoiceBox<String> Linka = new ChoiceBox<>();
 		@FXML
 		private Label showLine = new Label();
@@ -62,6 +64,8 @@ public class MainController extends Main{
 		private ChoiceBox<String> streetChoice = new ChoiceBox<>();
 		@FXML
 		private ChoiceBox<String> streetSpeedChoice = new ChoiceBox<>();
+		@FXML
+		private ChoiceBox<String> makeLine = new ChoiceBox<>();
 		
 		private List<Print> toPrint;
 		private long period = (long) Math.pow(10, 9);
@@ -389,6 +393,86 @@ public class MainController extends Main{
 						choicebox.setLayoutY(40);
 						streetAnchor.getChildren().add(choicebox);
 						
+						Button danger = new Button();
+						danger.setLayoutX(0);
+						danger.setLayoutY(80);
+						danger.setText("Block");
+						danger.setOnMouseClicked((m) ->{
+							chooseStreet.getItems().clear();
+							((Street)print).speed = 0;
+							streetAnchor.getChildren().remove(write);
+							write.setText("Chosen street: " + ((Street)print).ID + "\n current traffic: Closed Street");
+							streetAnchor.getChildren().add(write);
+							for(src.Line tempLine : jsonFile.lines ) {
+								for(java.util.AbstractMap.SimpleImmutableEntry<Street, Stop> tempRoute:tempLine.getRoute() ) {
+									if(tempRoute.getKey().getId().equals(((Street)print).getId())){
+										
+										if(!chooseStreet.getItems().contains(tempLine.getID())) {
+										chooseStreet.getItems().add(tempLine.getID());
+										}
+									}
+								}
+							}
+							chooseStreet.setLayoutX(50);
+							chooseStreet.setLayoutY(80);
+							streetAnchor.getChildren().add(chooseStreet);
+							
+							if(chooseStreet.getItems().size() > 0) {
+								Button newPath = new Button();
+								newPath.setLayoutX(110);
+								newPath.setLayoutY(80);
+								newPath.setText("NewPath");
+								streetAnchor.getChildren().add(newPath);
+								newPath.setOnMouseClicked((v) ->{
+									makeLine.getItems().clear();
+									streetAnchor.getChildren().remove(makeLine);
+									if(chooseStreet.getValue() == null)return;
+									String idStreet = chooseStreet.getValue();
+									int idStreetint = Integer.parseInt(idStreet);
+									if(((Street)print).speed == 0 && idStreetint >= 0 && idStreetint <= 3) {
+										for(int i = 0; i < jsonFile.lines.get(idStreetint-1).getRoute().size()-1;i++) {
+											
+											java.util.AbstractMap.SimpleImmutableEntry<Street, Stop> tempWriteRoute = jsonFile.lines.get(idStreetint-1).getRoute().get(i+1);
+											if(tempWriteRoute.getKey().getId().equals(((Street) print).getId())) {
+						
+												for(Street streetIntersect : jsonFile.streets ) {
+													if(tempWriteRoute.getKey().getId().equals(jsonFile.lines.get(idStreetint-1).getRoute().get(i).getKey().getId())) {
+														break;
+													}
+													if(jsonFile.lines.get(idStreetint-1).getRoute().get(i).getKey().intersects(streetIntersect)) {
+														if(streetIntersect.getId().equals(((Street) print).getId())) {
+															continue;
+														}
+														else {
+														makeLine.getItems().add(streetIntersect.getId());
+														
+														}
+																											}
+												}
+											}
+										}
+										
+										
+									}
+									makeLine.setLayoutX(0);
+									makeLine.setLayoutY(130);
+									streetAnchor.getChildren().add(makeLine);
+									Button setStreet = new Button();
+									streetAnchor.getChildren().remove(setStreet);
+									setStreet.setLayoutX(130);
+									setStreet.setLayoutY(130);
+									setStreet.setText("setStreet");
+									streetAnchor.getChildren().add(setStreet);
+									setStreet.setOnMouseClicked((t) ->{
+										
+										if(!jsonFile.updateLine(chooseStreet.getValue(),makeLine.getValue(),((Street)print).getId())) {
+											
+										}
+									});
+								});
+							}
+						});
+						streetAnchor.getChildren().add(danger);
 						Button traffic = new Button();
 						traffic.setLayoutX(60);
 						traffic.setLayoutY(40);
@@ -404,7 +488,6 @@ public class MainController extends Main{
 						});
 						streetAnchor.getChildren().add(traffic);
 						traffic.setOnMouseClicked((h)->{
-							//TODO
 							try {
 							((Street)print).speed = Double.parseDouble(choicebox.getValue().toString()) ;
 							streetAnchor.getChildren().remove(write);

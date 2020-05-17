@@ -3,6 +3,7 @@ package src;
 import org.json.simple.JSONObject;
 import java.io.FileReader;
 import java.time.LocalTime;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.simple.JSONArray;
@@ -316,7 +317,68 @@ public class ReadJSONFile {
 			}
 		}
 	}
-
+	public boolean updateLine(String num, String street, String delete) {
+		src.Street str1 = this.streets.get(0);
+		for( src.Street str : this.streets) {
+			if(str.getId().equals(street)) {
+				str1 = str;
+				break;
+			}
+		}
+		src.Street str2 = this.streets.get(0);
+		for( src.Street str : this.streets) {
+			if(str.getId().equals(delete)) {
+				str2 = str;
+				break;
+			}
+		}
+		//str1 
+		int numInt = Integer.parseInt(num);
+		src.Line l = this.lines.get(numInt-1);
+		src.Line modified = new src.Line(l.getID(), l.getStartTime(), l.getEndTime(), l.getDelay());
+		
+		java.util.List<java.util.AbstractMap.SimpleImmutableEntry<Street, Stop>> temp =this.lines.get(numInt-1).getRoute();
+		
+		for (int i = 0; i < l.getRoute().size(); i++) {
+			if(temp.get(i).getValue()== null) {
+				if(temp.get(i).getKey().equals(str2)) {
+				modified.addStreet(str1);
+				while(temp.get(i).getKey().equals(str2)) {
+					i++;
+				}
+				if(!modified.addStreet(temp.get(i).getKey())) {
+					return false;
+				}
+				}
+				else {
+				modified.addStreet(l.getRoute().get(i).getKey());
+				
+				}
+			}
+			else {
+				if(temp.get(i).getKey().equals(str2)) {
+					modified.addStreet(str1);
+					while(temp.get(i).getKey().equals(str2)) {
+						i++;
+					}
+					if(!modified.addStreet(temp.get(i).getKey())) {
+						return false;
+					}
+					}
+					else {
+						modified.addStop(temp.get(i).getValue());
+					}
+				
+			}
+			
+		}
+		modified.setPath();
+		this.lines.remove(numInt-1);
+		this.lines.add(numInt-1,modified);
+		
+		return true;
+		
+	}
 	public void deleteObjects(Pane content) {
 		List<Bus> toRemove = new ArrayList<>();
 		for(Bus bus : this.autobuses) {
