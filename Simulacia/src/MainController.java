@@ -356,7 +356,7 @@ public class MainController extends Main{
 						forHover.getChildren().add(writeVar);
 						forHover.getChildren().add(writeTime);
 
-						forHover.setPrefSize(150, 300);
+						forHover.setPrefSize(250, 300);
 						forHover.setVisible(true);
 						//print.line
 					});
