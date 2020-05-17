@@ -7,19 +7,24 @@ import java.util.List;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
+import javafx.util.Pair;
 
 public class Bus implements Print{
 	private Coordinate position;
 	private double distance;
 	private double speed;
 	public List<Shape> printable;
+	public Line trine;
+	private List<Stop> stop;
 	private Path path;
 	public boolean wait;
 	public double timeWait;
 	private TimeSchedule timeSchedule;
 	private Color c;
 	public String line;
-	public Bus(Coordinate position, double speed, Path path, double distance, List<Stop> stops, LocalTime start, String line) {
+	public long delay = 0;
+	public String lastStop;
+	public Bus(Coordinate position, double speed, Path path, double distance, List<Stop> stops, LocalTime start, String line,Line trine) {
 		if(line.equals("1")) {
 			c = Color.BLUE;
 		}
@@ -29,6 +34,7 @@ public class Bus implements Print{
 		if(line.equals("3")) {
 			c = Color.GREEN;
 		}
+		this.trine = trine;
 		this.line = line;
 		this.position = position;
 		this.speed = speed;
@@ -38,6 +44,8 @@ public class Bus implements Print{
 		this.path = path;
 		this.wait = false;
 		this.timeSchedule = new TimeSchedule(stops, path, start);
+		this.lastStop = stops.get(0).var;
+		this.stop = stops;
 	}
 
 	public boolean update(long period, List<Street> streets) {
@@ -48,6 +56,7 @@ public class Bus implements Print{
 		if(streetSpeed < 1) {
 			this.distance += (this.speed * (((double)period/1000000000)/10) * streetSpeed);
 			this.distance =(double) Math.round(this.distance*1000l)/1000l;
+			System.out.println(this.distance);
 		}
 		else {
 			this.distance += this.speed * (((double)period/1000000000)/10) ;
@@ -71,7 +80,14 @@ public class Bus implements Print{
 	public Path getPath() {
 		return this.path;
 	}
-	
+	public String getNextStop() {
+		for(int i = 0; i < this.stop.size()-1; i++) {
+			if(this.stop.get(i).var.equals(this.lastStop)) {
+				return this.stop.get(i+1).var;
+			}
+		}
+		return this.stop.get(this.stop.size()-1).var;
+	}
 	public TimeSchedule getTimeSchedule() {
 		return this.timeSchedule;
 	}

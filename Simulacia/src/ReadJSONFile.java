@@ -8,6 +8,7 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
 
@@ -17,7 +18,7 @@ public class ReadJSONFile {
 	private List<Stop> stops;
 	private List<Line> lines;
 	private List<Print> buses;
-	private List<Bus> autobuses;
+	public List<Bus> autobuses;
 	private MainController control;
 	
 	public List<Street> streets;
@@ -30,9 +31,9 @@ public class ReadJSONFile {
 		this.autobuses = new ArrayList<>();
 	}
 	
-	public void parseJSON(MainController control) throws Exception {
+	public void parseJSON(MainController control,ChoiceBox box) throws Exception {
 		parseStreetsAndStops();
-		parseLines();
+		parseLines(box);
 		control.printAll(list);
 		this.control = control; 
 	}
@@ -91,7 +92,7 @@ public class ReadJSONFile {
 		}		
 	}
 	
-	private void parseLines() throws Exception {
+	private void parseLines(ChoiceBox box) throws Exception {
 		
 		JSONParser parser = new JSONParser();	
 		FileReader reader = new FileReader("data/linky.json");
@@ -206,6 +207,9 @@ public class ReadJSONFile {
 			line.setPath();
 			
 		}
+		for	(int i =0; i < this.lines.size();i++) {
+			box.getItems().add(this.lines.get(i).getID());
+		}
 	}
 	
 	//buses start
@@ -224,7 +228,7 @@ public class ReadJSONFile {
 			for(int n = 0; n*delay+startS <= endS; n++) {
 				if(timeS == startS + (delay*n*60) && timeS != previousTimeS ) {
 					Path path = new Path(line.getPath());
-					Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, 0, line.stops, time,line.getID());
+					Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, 0, line.stops, time,line.getID(),line);
 					//int temp = (bus.getTimeSchedule().getTimes().size());
 					/*for(int i = 0; i < temp; i++) {
 						System.out.println("TIME : "+bus.getTimeSchedule().getTimes().get(i).getKey().toString()+" STOP : "+bus.getTimeSchedule().getTimes().get(i).getValue());
@@ -261,6 +265,12 @@ public class ReadJSONFile {
 							else {
 								bus.wait = true;
 								bus.timeWait = 500 / (((double)period/1000000000));
+								for (Pair <LocalTime,String> pair : bus.getTimeSchedule().getTimes()) {
+									if(pair.getValue().equals(this.stops.get(j).var)) {
+										bus.delay = time.toSecondOfDay() - pair.getKey().toSecondOfDay();
+										bus.lastStop=pair.getValue();
+									}
+								}
 							}
 						}
 					}
@@ -290,13 +300,14 @@ public class ReadJSONFile {
 				for(int n = 0; n*delay*60+startS <= endS; n++) {
 					if(timeS >= startS + (delay*n*60) && timeS < startS+(delay*n*60)+distance) {
 						int tmp = 0;
-						Bus buss = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, (((timeS - (startS+(delay*n*60)))*10)-50*tmp), line.stops, time.minusSeconds((timeS - (startS+(delay*n*60)))),line.getID());
+						Bus buss = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, (((timeS - (startS+(delay*n*60)))*10)-50*tmp), line.stops, time.minusSeconds((timeS - (startS+(delay*n*60)))),line.getID(),line);
 						for(Pair<LocalTime, String> pair : buss.getTimeSchedule().getTimes()) {
 							if(pair.getKey().toSecondOfDay() < timeS) {
 								tmp++;
 							}
 						}
-						Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, (((timeS - (startS+(delay*n*60)))*10)-50*(tmp-1)), line.stops, time.minusSeconds((timeS - (startS+(delay*n*60)))),line.getID());						this.buses.add(bus);
+						Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, (((timeS - (startS+(delay*n*60)))*10)-50*(tmp-1)), line.stops, time.minusSeconds((timeS - (startS+(delay*n*60)))),line.getID(),line);
+						this.buses.add(bus);
 						this.autobuses.add(bus);
 						this.control.printAll(buses);
 						this.buses.clear();
@@ -307,11 +318,12 @@ public class ReadJSONFile {
 	}
 
 	public void deleteObjects(Pane content) {
-
+		List<Bus> toRemove = new ArrayList<>();
 		for(Bus bus : this.autobuses) {
-			//this.autobuses.remove(bus);
+			toRemove.add(bus);
 			content.getChildren().remove(bus.printable.get(0));
 		}
+		this.autobuses.removeAll(toRemove);
 
 	}
 	

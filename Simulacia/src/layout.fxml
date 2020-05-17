@@ -29,10 +29,9 @@
                         <Button fx:id="setValueSpeed" layoutX="400.0" layoutY="5.0" mnemonicParsing="false" onMouseClicked="#setValueSpeed" text="OK" AnchorPane.topAnchor="5.0" />
                         <ChoiceBox fx:id="speedChoice" layoutX="259.0" layoutY="5.0" prefHeight="26.0" prefWidth="92.0" />
                         <Label fx:id="showSpeed" layoutX="361.0" layoutY="10.0" text="Label" />
-                        <ChoiceBox fx:id="streetChoice" layoutX="457.0" layoutY="5.0" prefWidth="150.0" />
-                        <ChoiceBox fx:id="streetSpeedChoice" layoutX="615.0" layoutY="6.0" prefWidth="50.0" />
-                        <Label fx:id="showStreetSpeed" layoutX="675.0" layoutY="9.0" text="Label" />
-                        <Button fx:id="setValueSpeedStreet" layoutX="713.0" layoutY="5.0" mnemonicParsing="false" onMouseClicked="#setValueSpeedStreet" text="OK" />
+                        <ChoiceBox fx:id="Linka" layoutX="463.0" layoutY="7.0" prefWidth="50.0" />
+                        <Label fx:id="showLine" layoutX="531.0" layoutY="11.0" text="Label" />
+                        <Button fx:id="setLine" layoutX="569.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#setValueLine" text="OK" />
                      </children>
                   </AnchorPane>
                </items>
@@ -41,6 +40,13 @@
          <right>
             <Pane fx:id="schedule" opacity="0.2" prefHeight="900.0" prefWidth="0.0" style="-fx-background-color: gray;" visible="false" BorderPane.alignment="CENTER" />
          </right>
+         <left>
+            <AnchorPane fx:id="forHover" prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text layoutX="5.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+               </children>
+            </AnchorPane>
+         </left>
       </BorderPane>
       <AnchorPane fx:id="plusButton" onMouseEntered="#buttonHoverPlus" onMouseExited="#buttonUnHoverPlus" onMousePressed="#buttonPressedPlus" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: gray;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -51,6 +57,7 @@
             </Text>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="streetAnchor" opacity="0.2" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="350.0" />
       <AnchorPane fx:id="minusButton" onMouseEntered="#buttonHoverMinus" onMouseExited="#buttonUnHoverMinus" onMousePressed="#buttonPressedMinus" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: gray;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
          <children>
             <Text layoutX="10.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
@@ -60,5 +67,6 @@
             </Text>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="lineAnchor" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="10.0" />
    </children>
 </AnchorPane>
