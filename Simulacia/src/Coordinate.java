@@ -37,6 +37,7 @@ public class Coordinate {
     public double getSpeedofStreet(List<Street> streets) {
     	for(Street str : streets) {
     		if (str.onStreet(this)) {
+    			if(str.speed == 0) return 0;
     			return 1/str.speed;
     		}
     	}

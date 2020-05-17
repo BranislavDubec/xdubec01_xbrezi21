@@ -15,8 +15,8 @@ import javafx.util.Pair;
 public class ReadJSONFile {
 	private LocalTime previous;
 	private List<Print> list;
-	private List<Stop> stops;
-	private List<Line> lines;
+	public List<Stop> stops;
+	public List<Line> lines;
 	private List<Print> buses;
 	public List<Bus> autobuses;
 	private MainController control;
@@ -233,7 +233,7 @@ public class ReadJSONFile {
 					/*for(int i = 0; i < temp; i++) {
 						System.out.println("TIME : "+bus.getTimeSchedule().getTimes().get(i).getKey().toString()+" STOP : "+bus.getTimeSchedule().getTimes().get(i).getValue());
 					}*/
-					this.buses.add(bus);
+					this.buses.add(bus);	
 					this.autobuses.add(bus);
 					this.control.printAll(buses);
 					this.buses.clear();
