@@ -17,20 +17,21 @@ public class TimeSchedule {
 		this.stopsTime = new ArrayList<>();
 		this.path = path.getPath();
 		this.start = start;
+		this.setTimes();
 	}
 	
 	public List<Pair<LocalTime, String>> getTimes() {
 		return this.stopsTime;
 	}
 	//
-	public void setTimes() {
+	private void setTimes() {
 		double A = 0;
 		for(int i = 1; i < path.size(); i++) {
 			for(Stop stop : stops) {
 				if(path.get(i).equals(stop.getCoordinate())) {
 					this.stopsTime.add(new Pair<LocalTime, String>(this.start.plusSeconds((long)A/10), stop.getId()));
 					A += 50;
-					if(i == 1) A -= 50;
+					if(i == 1) A -= 100;
 					break;
 				}
 			}

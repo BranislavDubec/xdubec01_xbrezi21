@@ -5,6 +5,9 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.sun.prism.paint.Color;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,10 +19,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Scale;
+import javafx.util.Pair;
 
 public class MainController extends Main{
 		@FXML
 		private Pane content;
+		@FXML
+		private Pane schedule;
 		@FXML
 		private AnchorPane plusButton;
 		@FXML
@@ -187,7 +193,6 @@ public class MainController extends Main{
 			String temp = showTime.getText() ;
 			time = LocalTime.parse(temp);
 			jsonFile.deleteObjects(content);
-			
 			showSpeed.setText(speedChoice.getValue());
 			double tmp = Double.parseDouble(showSpeed.getText())*1000000000;
 			period = (long) tmp;
@@ -208,9 +213,41 @@ public class MainController extends Main{
 		}
 		public void printAll(List<Print> toPrint) {
 			this.toPrint = toPrint;
-			
 			for(Print print:toPrint) {
+				
 				content.getChildren().addAll(print.printShapes());
+				if(print instanceof Bus) {
+					for (Node node : content.getChildren()) {
+						if(node instanceof javafx.scene.shape.Circle) {
+							if(((javafx.scene.shape.Circle) node).getRadius() > 3) {
+								node.setOnMouseClicked((e) -> {
+									e.consume();
+									schedule.setVisible(true);
+									schedule.setOpacity(1);
+									double y = 10;
+									schedule.setPrefSize(250, 200);
+									List<Pair<LocalTime, String>> temp = ((Bus) print).getTimeSchedule().getTimes();
+									for (Pair<LocalTime,String> a : temp) {
+										Label writeTime = new Label();
+										writeTime.setText(a.getKey().toString());
+										Label writeName = new Label();
+										writeName.setText(a.getValue());
+										writeTime.setLayoutX(10);
+										writeTime.setLayoutY(y);
+										writeName.setLayoutX(150);
+										writeName.setLayoutY(y);
+										y += 40;
+										schedule.getChildren().add(writeTime);
+										schedule.getChildren().add(writeName);
+									}
+								});
+								
+							}
+						}
+					}
+				}
+				
+				}
 			}
 		}
-}	
+

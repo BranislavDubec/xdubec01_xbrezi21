@@ -17,13 +17,22 @@ public class Bus implements Print{
 	public boolean wait;
 	public double timeWait;
 	private TimeSchedule timeSchedule;
-	
-	public Bus(Coordinate position, double speed, Path path, double distance, List<Stop> stops, LocalTime start) {
+	private Color c;
+	public Bus(Coordinate position, double speed, Path path, double distance, List<Stop> stops, LocalTime start, String line) {
+		if(line.equals("1")) {
+			c = Color.BLUE;
+		}
+		if(line.equals("2")) {
+			c = Color.PINK;
+		}
+		if(line.equals("3")) {
+			c = Color.GREEN;
+		}
 		this.position = position;
 		this.speed = speed;
 		this.distance = distance;
 		this.printable = new ArrayList<>();
-		this.printable.add(new Circle(position.getX(), position.getY(), 5, Color.BLUE));
+		this.printable.add(new Circle(position.getX(), position.getY(), 5, c));
 		this.path = path;
 		this.wait = false;
 		this.timeSchedule = new TimeSchedule(stops, path, start);
