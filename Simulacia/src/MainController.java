@@ -211,23 +211,36 @@ public class MainController extends Main{
 				}
 			}
 		}
+		@FXML
+		
 		public void printAll(List<Print> toPrint) {
 			this.toPrint = toPrint;
 			for(Print print:toPrint) {
 				
 				content.getChildren().addAll(print.printShapes());
 				if(print instanceof Bus) {
-					for (Node node : content.getChildren()) {
-						if(node instanceof javafx.scene.shape.Circle) {
-							if(((javafx.scene.shape.Circle) node).getRadius() > 3) {
-								node.setOnMouseClicked((e) -> {
+					Node node = content.getChildren().get(content.getChildren().size()-1);
+					node.setOnMouseClicked((e) -> {
 									e.consume();
+									Button del = new Button();
+									if(schedule.isVisible()) {
+										schedule.getChildren().clear();
+									}
 									schedule.setVisible(true);
 									schedule.setOpacity(1);
+									del.setLayoutX(230);
+									del.setLayoutY(10);
+									schedule.getChildren().add(del);
+									
 									double y = 10;
 									schedule.setPrefSize(250, 200);
 									Label writepar = new Label();
-									writepar.setText(print.);
+									String tmp = ((Bus) print).line;
+									writepar.setText("Line number: "+tmp );
+									writepar.setLayoutX(10);
+									writepar.setLayoutY(y);
+									schedule.getChildren().add(writepar);
+									y+=50;
 									List<Pair<LocalTime, String>> temp = ((Bus) print).getTimeSchedule().getTimes();
 									for (Pair<LocalTime,String> a : temp) {
 										Label writeTime = new Label();
@@ -236,18 +249,20 @@ public class MainController extends Main{
 										writeName.setText(a.getValue());
 										writeTime.setLayoutX(10);
 										writeTime.setLayoutY(y);
-										writeName.setLayoutX(150);
+										writeName.setLayoutX(130);
 										writeName.setLayoutY(y);
 										y += 40;
 										schedule.getChildren().add(writeTime);
 										schedule.getChildren().add(writeName);
 									}
+									del.setOnMouseClicked((f) ->{
+
+										schedule.getChildren().clear();
+										schedule.setVisible(false);
+									});
 								});
 								
 							}
-						}
-					}
-				}
 				
 				}
 			}

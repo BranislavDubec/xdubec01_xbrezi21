@@ -31,7 +31,7 @@ public class TimeSchedule {
 				if(path.get(i).equals(stop.getCoordinate())) {
 					this.stopsTime.add(new Pair<LocalTime, String>(this.start.plusSeconds((long)A/10), stop.var));
 					A += 50;
-					if(i == 1) A -= 100;
+					if(i == 1) A -= 50;
 					break;
 				}
 			}

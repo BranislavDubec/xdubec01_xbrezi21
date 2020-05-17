@@ -18,6 +18,7 @@ public class Bus implements Print{
 	public double timeWait;
 	private TimeSchedule timeSchedule;
 	private Color c;
+	public String line;
 	public Bus(Coordinate position, double speed, Path path, double distance, List<Stop> stops, LocalTime start, String line) {
 		if(line.equals("1")) {
 			c = Color.BLUE;
@@ -28,6 +29,7 @@ public class Bus implements Print{
 		if(line.equals("3")) {
 			c = Color.GREEN;
 		}
+		this.line = line;
 		this.position = position;
 		this.speed = speed;
 		this.distance = distance;

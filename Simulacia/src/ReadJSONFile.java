@@ -9,6 +9,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
 import javafx.scene.layout.Pane;
+import javafx.util.Pair;
 
 public class ReadJSONFile {
 	private LocalTime previous;
@@ -288,8 +289,14 @@ public class ReadJSONFile {
 			if(time.toSecondOfDay() >= startS && time.toSecondOfDay() <= endS+distance) {
 				for(int n = 0; n*delay*60+startS <= endS; n++) {
 					if(timeS >= startS + (delay*n*60) && timeS < startS+(delay*n*60)+distance) {
-						Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, (timeS - (startS+(delay*n*60)))*10, line.stops, time,line.getID());
-						this.buses.add(bus);
+						int tmp = 0;
+						Bus buss = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, (((timeS - (startS+(delay*n*60)))*10)-50*tmp), line.stops, time.minusSeconds((timeS - (startS+(delay*n*60)))),line.getID());
+						for(Pair<LocalTime, String> pair : buss.getTimeSchedule().getTimes()) {
+							if(pair.getKey().toSecondOfDay() < timeS) {
+								tmp++;
+							}
+						}
+						Bus bus = new Bus(line.getRoute().get(0).getValue().getCoordinate(), 1, path, (((timeS - (startS+(delay*n*60)))*10)-50*(tmp-1)), line.stops, time.minusSeconds((timeS - (startS+(delay*n*60)))),line.getID());						this.buses.add(bus);
 						this.autobuses.add(bus);
 						this.control.printAll(buses);
 						this.buses.clear();
