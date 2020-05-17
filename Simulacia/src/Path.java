@@ -14,7 +14,7 @@ public class Path {
 		return Math.sqrt(Math.pow(first.getX() - second.getX(), 2) + Math.pow(first.getY() - second.getY(), 2));
 	}
 	
-	public Coordinate getCoord(double distance) {
+	public Coordinate getCoord(double distance, double prevDist) {
 		double potentionalDistance = 0;
 		
 		Coordinate first = null;
@@ -26,7 +26,9 @@ public class Path {
 			if(potentionalDistance + coordDistance(first, second) > distance) {
 				break;
 			}
-			
+			if(potentionalDistance + coordDistance(first, second) > prevDist && potentionalDistance + coordDistance(first, second) < distance) {
+				return second;
+			}
 			potentionalDistance += coordDistance(first, second);
 		}
 		double totaldistance = 0;

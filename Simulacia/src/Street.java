@@ -133,10 +133,12 @@ public class Street implements Print{
 	public List<Shape> printShapes() {
 		double centerTextX = start.getX() > end.getX() ? end.getX() : start.getX();
 		double centerTextY = start.getY() > end.getY() ? end.getY() : start.getY();
-		
+		Line line = new Line(start.getX(), start.getY(), end.getX(), end.getY());
+		line.setStrokeWidth(2);
 		return Arrays.asList(
+				
 				new Text(Math.abs(start.getX() - end.getX()) / 2 + centerTextX, Math.abs(start.getY() - end.getY()) / 2 + centerTextY - 5, this.ID),
-				new Line(start.getX(), start.getY(), end.getX(), end.getY())
+				line
 				);
 	}
 }

@@ -372,18 +372,17 @@ public class MainController extends Main{
 					Node node = content.getChildren().get(content.getChildren().size()-1);
 					node.setOnMouseClicked((e) ->{
 						e.consume();
-						Button del  = new Button();
-						if(streetAnchor.isVisible() == true) {
-							//streetAnchor.setVisible(false);
+						if(streetAnchor.isVisible()) {
 							streetAnchor.getChildren().clear();
 						}
+						Button del  = new Button();
 						streetAnchor.setVisible(true);
 						Label write = new Label();
 						write.setText("Chosen street: " + ((Street)print).ID + "\n current traffic: " + ((Street)print).speed);
 						streetAnchor.setOpacity(1);
 						streetAnchor.getChildren().add(write);
 						ChoiceBox choicebox = new ChoiceBox();
-						for(int i = 1; i <= 10; i++) {
+						for(int i = 1; i <= 5; i++) {
 							choicebox.getItems().add(i);
 						}
 						choicebox.setValue(((Street)print).speed);
@@ -408,7 +407,7 @@ public class MainController extends Main{
 							//TODO
 							try {
 							((Street)print).speed = Double.parseDouble(choicebox.getValue().toString()) ;
-							streetAnchor.getChildren().remove(0);
+							streetAnchor.getChildren().remove(write);
 							write.setText("Chosen street: " + ((Street)print).ID + "\n current traffic: " + ((Street)print).speed);
 							streetAnchor.getChildren().add(write);
 							}
